@@ -23,19 +23,12 @@ public class Disco {
     private Stato stato;
     private List<Traccia> tracce;
     private int ncopie;
-    
-    // ci va inserita l'immagine private img...
+    private String img;
     
     
     private static int cont=1;
     
-    
-    
-    
-    
-    
-    
-    
+
     
     
 }

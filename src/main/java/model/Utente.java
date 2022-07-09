@@ -6,6 +6,7 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,21 +20,13 @@ public class Utente {
     private String email;
     private String telefono;
     private String password;
+    private Date ddn;
     
     private static int cont=1; // contatore per l'autoincremento dell'id 
 
     
     
-    public Utente(String nome, String cognome, String email, String telefono, String password) {
-        id=cont;
-        cont++;
-        
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.telefono = telefono;
-        this.password = password;
-    }
+
     
     
     public Utente(){
@@ -44,7 +37,8 @@ public class Utente {
         cognome= "";
         email="";
         telefono="";
-        password="";   
+        password="";  
+        ddn=null;
     }
     
     @JsonIgnore
@@ -102,6 +96,16 @@ public class Utente {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Date getDdn() {
+        return ddn;
+    }
+    
+    
+    @JsonProperty
+    public void setDdn(Date ddn) {
+        this.ddn = ddn;
+    }
     
     
     
@@ -110,7 +114,7 @@ public class Utente {
     
     
     
-    public static Utente dummyUtente (String nome, String cognome, String email, String telefono,String password) {
+    public static Utente dummyUtente (String nome, String cognome, String email, String telefono,String password,Date ddn) {
         Utente utente = new Utente();
         
         utente.setNome(nome);
@@ -118,7 +122,7 @@ public class Utente {
         utente.setEmail(email);
         utente.setTelefono(telefono);
         utente.setPassword(password);
-        
+        utente.setDdn(ddn);
         
         return utente;
     }
