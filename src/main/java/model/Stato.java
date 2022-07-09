@@ -5,7 +5,7 @@
 package model;
 
 /**
- *
+ * enumerativo ottimo pessimo pessimo
  * @author matte
  */
 public class Stato {

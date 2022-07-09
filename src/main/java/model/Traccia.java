@@ -31,16 +31,7 @@ public class Traccia {
         
     }
 
-    public Traccia(String nome, String durata) {
-        id=cont;
-        cont++;
-        this.nome = nome;
-        this.durata = durata;
-    }
 
-    
-    
-    
     
     public int getId() {
         return id;
@@ -90,14 +81,12 @@ public class Traccia {
     
     
     
-     public static Traccia dummyUtente (String nome, String durata, String compositore, String cantante) {
+     public static Traccia dummyTraccia (String nome, String durata) {
         Traccia traccia = new Traccia();
         
         traccia.setNome(nome);
         traccia.setDurata(durata);
-        traccia.setCompositore(compositore);
-        traccia.setCantante(cantante);
-        
+
         
         return traccia;
      }

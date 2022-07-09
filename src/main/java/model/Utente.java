@@ -4,6 +4,7 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -45,7 +46,8 @@ public class Utente {
         telefono="";
         password="";   
     }
-
+    
+    @JsonIgnore
     public int getId() {
         return id;
     }
