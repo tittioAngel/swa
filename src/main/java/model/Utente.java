@@ -38,7 +38,7 @@ public class Utente {
         email="";
         telefono="";
         password="";  
-        ddn=null;
+        ddn=new Date();
     }
     
     @JsonIgnore
