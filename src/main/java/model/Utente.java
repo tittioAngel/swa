@@ -6,6 +6,7 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,12 +16,14 @@ import java.util.List;
  */
 public class Utente {
     private int id;
+    private String username;
     private String nome;
     private String cognome;
     private String email;
     private String telefono;
     private String password;
     private Date ddn;
+    private List<Collezione> collezione;
     
     private static int cont=1; // contatore per l'autoincremento dell'id 
 
@@ -33,12 +36,14 @@ public class Utente {
         id=cont;
         cont++;
         
+        username="";
         nome="";
         cognome= "";
         email="";
         telefono="";
         password="";  
         ddn=new Date();
+        collezione= new ArrayList<Collezione>();
     }
     
     @JsonIgnore
@@ -46,8 +51,19 @@ public class Utente {
         return id;
     }
 
-   
+    
+    
+    public String getUsername() {
+        return username;
+    }
 
+    
+    @JsonProperty
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+   
     public String getNome() {
         return nome;
     }
@@ -106,6 +122,15 @@ public class Utente {
     public void setDdn(Date ddn) {
         this.ddn = ddn;
     }
+
+    public List<Collezione> getCollezione() {
+        return collezione;
+    }
+
+    @JsonProperty
+    public void setCollezione(List<Collezione> collezione) {
+        this.collezione = collezione;
+    }
     
     
     
@@ -114,15 +139,18 @@ public class Utente {
     
     
     
-    public static Utente dummyUtente (String nome, String cognome, String email, String telefono,String password,Date ddn) {
+    
+    public static Utente dummyUtente (String username, String nome, String cognome, String email, String telefono,String password,Date ddn,List<Collezione> collezione) {
         Utente utente = new Utente();
         
+        utente.setUsername(username);
         utente.setNome(nome);
         utente.setCognome(cognome);
         utente.setEmail(email);
         utente.setTelefono(telefono);
         utente.setPassword(password);
         utente.setDdn(ddn);
+        utente.setCollezione(collezione);
         
         return utente;
     }
