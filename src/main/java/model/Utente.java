@@ -22,7 +22,7 @@ public class Utente {
     private String email;
     private String telefono;
     private String password;
-    private Date ddn;
+   
     private List<Collezione> collezione;
     
     private static int cont=1; // contatore per l'autoincremento dell'id 
@@ -42,7 +42,6 @@ public class Utente {
         email="";
         telefono="";
         password="";  
-        ddn=new Date();
         collezione= new ArrayList<Collezione>();
     }
     
@@ -113,16 +112,7 @@ public class Utente {
         this.password = password;
     }
 
-    public Date getDdn() {
-        return ddn;
-    }
     
-    
-    @JsonProperty
-    public void setDdn(Date ddn) {
-        this.ddn = ddn;
-    }
-
     public List<Collezione> getCollezione() {
         return collezione;
     }
@@ -140,7 +130,7 @@ public class Utente {
     
     
     
-    public static Utente dummyUtente (String username, String nome, String cognome, String email, String telefono,String password,Date ddn,List<Collezione> collezione) {
+    public static Utente dummyUtente (String username, String nome, String cognome, String email, String telefono,String password,List<Collezione> collezione) {
         Utente utente = new Utente();
         
         utente.setUsername(username);
@@ -149,7 +139,7 @@ public class Utente {
         utente.setEmail(email);
         utente.setTelefono(telefono);
         utente.setPassword(password);
-        utente.setDdn(ddn);
+        
         utente.setCollezione(collezione);
         
         return utente;

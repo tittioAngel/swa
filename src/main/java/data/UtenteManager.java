@@ -14,17 +14,17 @@ import swarest.RESTWebApplicationException;
  * @author matte
  */
 public class UtenteManager {
-   /**
+   
     public static List<Utente> utenti = new ArrayList<Utente>();
 
     
      public static void initilizeData(){
         if (utenti.isEmpty()) {
-            List<Skill> skills = new ArrayList<Skill>(); 
-            skills.add(Skill.dummySkills("Programmazione Java Sockets"));
-            skills.add(Skill.dummySkills(("programmazione in C")));
+//            List<Collezione> collezione = new ArrayList<Skill>(); 
+//            skills.add(Skill.dummySkills("Programmazione Java Sockets"));
+//            skills.add(Skill.dummySkills(("programmazione in C")));
             
-            utenti.add(Utente.dummyUtente(1, "Stefano", "Pisciella", "stefano@gmail.com", "3880581680", "stefano", "stefano", skills));
+            utenti.add(Utente.dummyUtente("stef","Stefano", "Pisciella", "stefano@gmail.com", "3880581680","12345",);
             utenti.add(Utente.dummyUtente(2, "Beatrice", "Tomassi", "beatrice@gmail.com", "3880581680", "beatrice", "beatrice", skills));
             utenti.add(Utente.dummyUtente(3, "Nicola", "Rossi", "nicola@gmail.com", "3880581680", "nicola", "nicola", skills));
         }
@@ -70,5 +70,5 @@ public class UtenteManager {
             }       
         }
         return utentiIdonei; 
-    }**/
+    }
 }
