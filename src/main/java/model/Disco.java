@@ -25,8 +25,7 @@ public class Disco {
     private Stato stato;
     private List<Traccia> tracce;
     private int ncopie;
-    private String img;
-    
+
     
     private static int cont=1;
 
@@ -44,7 +43,6 @@ public class Disco {
         stato=null;
         tracce=new ArrayList<>();
         ncopie=0;
-        img=""; 
     }
     
     
@@ -139,7 +137,7 @@ public class Disco {
 
     @JsonProperty
     public void setTracce(List<Traccia> tracce) {
-        this.tracce = tracce;
+        this.tracce=tracce;
     }
 
     public int getNcopie() {
@@ -151,19 +149,9 @@ public class Disco {
         this.ncopie = ncopie;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    
-    @JsonProperty
-    public void setImg(String img) {
-        this.img = img;
-    }
-
   
     
-   public static Disco dummyDisco ( String titolo, Autore autore, int anno, String etichetta, String formato, String barcode, List<Traccia> tracce, Stato stato, String img,int ncopie, Genere genere) {
+   public static Disco dummyDisco ( String titolo, Autore autore, int anno, String etichetta, String formato, String barcode, List<Traccia> tracce, Stato stato,int ncopie, Genere genere) {
         Disco disco = new Disco();
         
         
@@ -176,7 +164,6 @@ public class Disco {
         disco.setBarcode(barcode);
         disco.setTracce(tracce);
         disco.setStato(stato);
-        disco.setImg(img);
         disco.setNcopie(ncopie);
         
         

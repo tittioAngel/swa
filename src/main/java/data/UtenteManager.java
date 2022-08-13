@@ -21,7 +21,7 @@ public class UtenteManager {
      public static void initilizeData(){
         if (utenti.isEmpty()) {
 //            List<Collezione> collezione = new ArrayList<Skill>(); 
-//            skills.add(Skill.dummySkills("Programmazione Java Sockets"));
+   //        skills.add(Skill.dummySkills("Programmazione Java Sockets"));
 //            skills.add(Skill.dummySkills(("programmazione in C")));
             
             utenti.add(Utente.dummyUtente("stef","Stefano", "Pisciella", "stefano@gmail.com", "3880581680","12345",);
