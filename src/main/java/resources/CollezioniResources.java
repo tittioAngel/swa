@@ -19,6 +19,8 @@ import model.Disco;
 import model.Stato;
 import model.Utente;
 import swarest.RESTWebApplicationException;
+import jakarta.ws.rs.core.UriInfo;
+import java.net.URI;
 /**
  *
  * @author LENOVO
@@ -32,11 +34,19 @@ public class CollezioniResources {
     }
     
     
-    //OP2
+    /**
+     * OP 2 
+     * @param uriinfo
+     * @param id
+     * @return
+     * @throws RESTWebApplicationException 
+     */
     @GET
     @Produces("application/json")
     @Path("{id: [1-9]+}")
-    public Response getCollezioni(@PathParam("id") int id){
+    public Response getCollezioni(
+                    @Context UriInfo uriinfo,    
+                    @PathParam("id") int id)throws RESTWebApplicationException{
         
         List<Map<String, Object>> collezioni = new ArrayList();
         
@@ -78,7 +88,7 @@ public class CollezioniResources {
             // creazione url per vedere il dettaglio
             URI uri = uriinfo.getBaseUriBuilder()
                     .path(getClass())
-                    .path(getClass(), "getProject")
+                    .path(getClass(), "getDettCol")
                     .build(i);
             collezione.put("url", uri.toString());
             collezioni.add(collezione);
@@ -106,6 +116,34 @@ public class CollezioniResources {
              throw new RESTWebApplicationException(404, "collezioni inesistenti");
         }     
         return Response.ok(res).build();
+    }
+    
+    /**
+     * Estensione del path per gestire le operazioni su singolo progetto
+     * @param id
+     * @return 
+     */
+    @Path("{id: [1-9]+}")
+    public ProgettoResource getProject(@PathParam("id") int id) {
+        
+        Progetto p = null;
+        
+        if (id > 2) throw new RESTWebApplicationException(404, "progetto inesistente");
+        
+        if (id == 1) {
+            p = new Progetto();
+            p.setId(id);
+            p.setNome("p1");
+            p.setDescrizione("Progetto p1");
+        }
+        
+        if (id == 2) {
+            p = new Progetto();
+            p.setId(id);
+            p.setNome("p2");
+            p.setDescrizione("Progetto p2");
+        }
+        return new ProgettoResource(p);
     }
     
 }
