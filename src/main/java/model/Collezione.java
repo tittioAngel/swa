@@ -16,6 +16,8 @@ public class Collezione {
     private int id;
     private String nome;
     private List <Disco> dischi;
+    private Utente creatore;
+    private List <Utente> condivisi;
     
     private static int cont=1;
     
@@ -25,6 +27,7 @@ public class Collezione {
         
         nome="";
         dischi= new ArrayList<>();
+        creatore= new Utente();
     }
 
     public int getId() {
@@ -50,12 +53,35 @@ public class Collezione {
         this.dischi = dischi;
     }
     
+    public Utente getCreatore() {
+        return creatore;
+    }
     
-    public Collezione dummyColezione(String nome, List<Disco> dischi){
+    @JsonProperty
+    public void setCreatore(Utente creatore){
+        this.creatore = creatore;
+    }
+    
+     public List<Utente> getCondivisi() {
+        return condivisi;
+    }
+
+    @JsonProperty
+    public void addCondivisi(Utente condiviso) {
+        this.condivisi.add(condiviso);
+    }
+    
+    /**
+     *
+     * @param nome
+     * @param creatore
+     * @return
+     */
+    public static Collezione dummyCollezione(String nome, Utente creatore){
         Collezione collezione=new Collezione();
         
         collezione.setNome(nome);
-        collezione.setDischi(dischi);
+        collezione.setCreatore(creatore);
         
         return collezione;
     }

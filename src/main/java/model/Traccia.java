@@ -11,10 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author matte
  */
 public class Traccia {
+
     private int id;
     private String nome;
     private String durata;
-    private String cantante;
+    private Autore feat;
     private String compositore;
     
     private static int cont=1;
@@ -26,7 +27,7 @@ public class Traccia {
         
         nome="";
         durata="";
-        cantante="";
+        feat=new Autore();
         compositore="";
         
     }
@@ -58,14 +59,14 @@ public class Traccia {
         this.durata = durata;
     }
 
-    public String getCantante() {
-        return cantante;
+    public Autore getFeat() {
+        return feat;
     }
 
     
     @JsonProperty
-    public void setCantante(String cantante) {
-        this.cantante = cantante;
+    public void setFeat(Autore feat) {
+        this.feat = feat;
     }
 
     public String getCompositore() {
@@ -81,11 +82,13 @@ public class Traccia {
     
     
     
-     public static Traccia dummyTraccia (String nome, String durata) {
+     public static Traccia dummyTraccia (String nome, String durata, Autore feat, String compositore) {
         Traccia traccia = new Traccia();
         
         traccia.setNome(nome);
         traccia.setDurata(durata);
+        traccia.setFeat(feat);
+        traccia.setCompositore(compositore);
 
         
         return traccia;

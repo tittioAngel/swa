@@ -17,7 +17,7 @@ public class Disco {
     private int id;
     private String titolo;
     private Autore autore;
-    private Genere genere;
+    private String genere;
     private int anno;
     private String etichetta;
     private String formato;
@@ -35,13 +35,13 @@ public class Disco {
         
         titolo="";
         autore=new Autore();
-        genere=new Genere();
+        genere="";
         anno=0;
         etichetta="";
         formato="";
         barcode="";
         stato=null;
-        tracce=new ArrayList<>();
+        tracce=new ArrayList<Traccia>();
         ncopie=0;
     }
     
@@ -77,12 +77,12 @@ public class Disco {
         this.autore = autore;
     }
 
-    public Genere getGenere() {
+    public String getGenere() {
         return genere;
     }
 
     @JsonProperty
-    public void setGenere(Genere genere) {
+    public void setGenere(String genere) {
         this.genere = genere;
     }
 
@@ -151,7 +151,7 @@ public class Disco {
 
   
     
-   public static Disco dummyDisco ( String titolo, Autore autore, int anno, String etichetta, String formato, String barcode, List<Traccia> tracce, Stato stato,int ncopie, Genere genere) {
+   public static Disco dummyDisco ( String titolo, Autore autore, int anno, String etichetta, String formato, String barcode, Stato stato,int ncopie, String genere) {
         Disco disco = new Disco();
         
         
@@ -162,7 +162,6 @@ public class Disco {
         disco.setEtichetta(etichetta);
         disco.setFormato(formato);
         disco.setBarcode(barcode);
-        disco.setTracce(tracce);
         disco.setStato(stato);
         disco.setNcopie(ncopie);
         

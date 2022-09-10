@@ -24,6 +24,10 @@ public class Autore {
         nome="";
 }
 
+    public Autore(String nome) {
+        this.setNome(nome);
+    }
+
     
     public int getId() {
         return id;
@@ -40,7 +44,7 @@ public class Autore {
         this.nome = nome;
     }
     
-    public Autore dummyAutore(String nome){
+    public static Autore dummyAutore(String nome){
         Autore autore= new Autore();
         
         autore.setNome(nome);

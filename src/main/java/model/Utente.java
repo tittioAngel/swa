@@ -50,7 +50,9 @@ public class Utente {
         return id;
     }
 
-    
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public String getUsername() {
         return username;
@@ -123,16 +125,10 @@ public class Utente {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    public static Utente dummyUtente (String username, String nome, String cognome, String email, String telefono,String password,List<Collezione> collezione) {
+    public static Utente dummyUtente (int Id, String username, String nome, String cognome, String email, String telefono,String password) {
         Utente utente = new Utente();
         
+        utente.setId(Id);
         utente.setUsername(username);
         utente.setNome(nome);
         utente.setCognome(cognome);
@@ -140,7 +136,6 @@ public class Utente {
         utente.setTelefono(telefono);
         utente.setPassword(password);
         
-        utente.setCollezione(collezione);
         
         return utente;
     }

@@ -20,7 +20,7 @@ public class DischiManager {
     
      public static void initilizeData(){
          if (dischi.isEmpty()) {
-             List<Traccia> tracce= TracceManager.initiazizeData();
+             List<Traccia> tracce= TracceManager.initilizeData();
              
              List <Traccia> tracce1 =new ArrayList<Traccia>();
              tracce1.add(tracce.get(0));
@@ -34,7 +34,7 @@ public class DischiManager {
              tracce3.add(tracce.get(4));
              tracce3.add(tracce.get(5));
              
-             dischi.add(Disco.dummyDisco("Exuvia", "Caparezza", 2021, "Polydor", "LP", "abcdefg", tracce1, Stato.ottimo,2,"Rap"));
+             dischi.add(Disco.dummyDisco("Exuvia", "Caparezza", 2021, "Polydor", "LP", "abcdefg",Stato.ottimo,2,"Rap"));
              
              
          }
