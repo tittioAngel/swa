@@ -27,12 +27,6 @@ import java.net.URI;
  */
 public class CollezioniResources {
     
-    private final Collezione c;
-    
-    CollezioniResources(Collezione c) {
-        this.c = c;
-    }
-    
     
     /**
      * OP 2 
@@ -60,31 +54,28 @@ public class CollezioniResources {
         
         for (int i = 0; i <= 9; i++) {
             
-            Collezione temp = new Collezione();
+            Collezione c = new Collezione();
+            List<Disco> dischi = c.getDischi(); 
             
             if(i<3){
-                temp = Collezione.dummyCollezione("c" + i, u1);
+                c = Collezione.dummyCollezione("c" + i, u1);
+                dischi.add(Disco.dummyDisco("t1", a1, 2021, "Polydor", "LP", "abcdefg",Stato.ottimo,2,"Rap"));
+                dischi.add(Disco.dummyDisco("t2", a2, 2018, "Pippo", "CD", "foo",Stato.pessimo,1,"Indie"));
             }else if(i<6){
-                temp = Collezione.dummyCollezione("c" + i, u2);
+                c = Collezione.dummyCollezione("c" + i, u2);
+                dischi.add(Disco.dummyDisco("t3", a3, 1998, "Music", "CD", "barcode",Stato.buono,1,"Rap"));
             }else{
-                temp = Collezione.dummyCollezione("c" + i, u3);
+                c = Collezione.dummyCollezione("c" + i, u3);
+                dischi.add(Disco.dummyDisco("t4", a2, 1894, "Music", "LP", "fffffffff",Stato.buono,1,"Classica"));
+                dischi.add(Disco.dummyDisco("t5", a3, 2022, "Polydor", "CD", "24385",Stato.ottimo,1,"Rap"));
+                dischi.add(Disco.dummyDisco("t6", a1, 2019, "Pippo", "CD", "11111111",Stato.buono,1,"Rap"));
             }
               
-            List<Disco> dischi = temp.getDischi(); 
-            for(int j=0; j<=3; j++){
-                if(j==0){
-                    dischi.add(Disco.dummyDisco("t" + j, a1, 2021, "Polydor", "LP", "abcdefg",Stato.ottimo,2,"Rap"));
-                }else if(j==1){
-                    dischi.add(Disco.dummyDisco("t" + j, a2, 2018, "Pippo", "CD", "foo",Stato.pessimo,1,"Indie"));
-                }else{
-                    dischi.add(Disco.dummyDisco("t" + j, a3, 1998, "Music", "CD", "barcode",Stato.buono,1,"Rap"));
-                }
-            }
-     
+            c.setDischi(dischi);
             
             Map<String, Object> collezione = new HashMap<>();
-            collezione.put("nome", temp.getNome());
-            collezione.put("Creatore", temp.getCreatore());
+            collezione.put("nome", c.getNome());
+            collezione.put("Creatore", c.getCreatore());
             // creazione url per vedere il dettaglio
             URI uri = uriinfo.getBaseUriBuilder()
                     .path(getClass())
@@ -124,26 +115,22 @@ public class CollezioniResources {
      * @return 
      */
     @Path("{id: [1-9]+}")
-    public ProgettoResource getProject(@PathParam("id") int id) {
+    public CollezioneResource getDettCol(@PathParam("id") int id) {
         
-        Progetto p = null;
+        Collezione c = null;
+        Utente u1 = Utente.dummyUtente(1, "thSantacruz","Giacomo", "Santacroce", "giacomo@gmail.com", "3455944879","12345");
+        Utente u2 = Utente.dummyUtente(2, "tittioAngel","Matteo", "Angelucci", "metteo@gmail.com", "3455944879","12345");
+        Utente u3 = Utente.dummyUtente(3, "claudo","Claudio", "Angelucci", "claudio@gmail.com", "3455944879","12345");
         
-        if (id > 2) throw new RESTWebApplicationException(404, "progetto inesistente");
-        
-        if (id == 1) {
-            p = new Progetto();
-            p.setId(id);
-            p.setNome("p1");
-            p.setDescrizione("Progetto p1");
+        if(id<3){
+            c = Collezione.dummyCollezione("c" + id, u1);
+        }else if(id<6){
+            c = Collezione.dummyCollezione("c" + id, u2);
+        }else{
+            c = Collezione.dummyCollezione("c" + id, u3);
         }
         
-        if (id == 2) {
-            p = new Progetto();
-            p.setId(id);
-            p.setNome("p2");
-            p.setDescrizione("Progetto p2");
-        }
-        return new ProgettoResource(p);
+        return new CollezioneResource(c);
     }
     
 }

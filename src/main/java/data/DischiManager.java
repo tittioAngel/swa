@@ -34,7 +34,7 @@ public class DischiManager {
              tracce3.add(tracce.get(4));
              tracce3.add(tracce.get(5));
              
-             dischi.add(Disco.dummyDisco("Exuvia", "Caparezza", 2021, "Polydor", "LP", "abcdefg",Stato.ottimo,2,"Rap"));
+             //dischi.add(Disco.dummyDisco("Exuvia", "Caparezza", 2021, "Polydor", "LP", "abcdefg",Stato.ottimo,2,"Rap"));
              
              
          }
