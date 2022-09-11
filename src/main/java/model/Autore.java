@@ -33,7 +33,10 @@ public class Autore {
         return id;
     }
 
-
+    @JsonProperty
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

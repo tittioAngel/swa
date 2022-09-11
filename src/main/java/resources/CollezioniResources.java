@@ -110,6 +110,44 @@ public class CollezioniResources {
     }
     
     /**
+     * OP 3 elenco collezioni condivise con un utente
+     * @param uriinfo
+     * @param idAuth
+     * @return
+     * @throws RESTWebApplicationException 
+     */
+    @GET
+    @Produces("application/json")
+    @Path("{id: [1-9]+}")
+    public Response getCondivisi(
+                    @Context UriInfo uriinfo,    
+                    @PathParam("id") int idAuth)throws RESTWebApplicationException{
+        
+        Utente u = new Utente();
+        if(idAuth==1){
+            u = Utente.dummyUtente(1, "thSantacruz","Giacomo", "Santacroce", "giacomo@gmail.com", "3455944879","12345");
+        }else if(idAuth==2){
+            u = Utente.dummyUtente(2, "tittioAngel","Matteo", "Angelucci", "metteo@gmail.com", "3455944879","12345");
+        }else{
+            u = Utente.dummyUtente(3, "claudo","Claudio", "Angelucci", "claudio@gmail.com", "3455944879","12345");
+        }
+        
+        List<Collezione> res = new ArrayList<>();
+        
+        Collezione c1 = new Collezione();
+        c1.setNome("c1");
+        c1.getCondivisi().add(u);
+        
+        Collezione c2 = new Collezione();
+        c2.setNome("c2");
+        c2.getCondivisi().add(u);
+        
+        res.add(c1);
+        res.add(c2);
+        return Response.ok(res).build();
+    }
+    
+    /**
      * Estensione del path per gestire le operazioni su singolo progetto
      * @param id
      * @return 
