@@ -1,10 +1,220 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+	<head>
+		<meta charset="utf-8">
+		<title>SWA</title>	
+		<link rel="stylesheet" href="style.css"/>
+		
+		
+		<style>	
+		.tabs > nav > ul {overflow:hidden; margin:0; padding:0; list-style:none;}
+		.tabs > nav > ul > li {float:left; border-top: 2px solid #00695c; border-left: 1px solid #00695c; border-right: 1px solid #00695c; margin-right:2px; padding:2px; cursor: pointer;}
+		.tabs > nav > ul > li.active {color: white; background-color: #00695c;}
+		.tabs .tabcontent {border: 2px solid #00695c; padding:2px; }
+		.tabs .tabcontent > section {display:none; }
+		.tabs .tabcontent > section.active {display:block}		
+		/* impostazioni accessibili */
+		.tabs.v1bis > nav {display:none;}
+		.tabs.v1bis .tabcontent > section {display:block; }
+		.tabs.v1bis.enabled > nav {display:block;}
+		.tabs.v1bis.enabled .tabcontent > section {display:none}		
+		.tabs.v1bis.enabled .tabcontent > section.active {display:block}		
+		</style>
+		
+		<script src="jquery.min.js">/* */</script>
+		
+		
+		<script>
+			// attende che la pagina web carichi completamente 
+			$(document).ready(function(){	
+				// attende che il mouse punti il paragrafo corrispondende all'operazione OP4
+				$( "#trigger_visualizzazione_dettaglio" ).mousemove(function() {
+					// modifica il cursore
+					$( "#trigger_visualizzazione_dettaglio" ).css("cursor","pointer");
+				});
+				
+				// attende che il paragrafo corrispondente all'operazione OP4 venga clickato
+				$( "#trigger_visualizzazione_dettaglio" ).click(function() {
+						// fa la request del file JSON contente i dettagli del profilo utente
+						$.get('http://localhost:8080/SocialDevelopService/rest/utenti/1/dettaglio', function (data, textStatus, jqXHR) {
+        					// scrive i dati presenti nel JSON nelle rispettive voci dell'elenco del profilo utente
+							$('#nome').text(data.nome);
+							$('#cognome').text(data.cognome);
+							$('#email').text(data.email);
+							$('#telefono').text(data.telefono);
+							$('#skill1').text(data.skills[0].nome);
+							$('#skill2').text(data.skills[1].nome);
+
+							// una volta caricato il JSON, fa visualizzare il <div> contente i dettagli del profilo utente
+							$( "#dettaglio_profilo_utente" ).fadeToggle("slow", function() {
+								// si visualizzerano a cascata i vari dati del profilo utente
+								$( "#nome" ).fadeToggle(400);
+								$( "#cognome" ).fadeToggle(500);
+								$( "#email" ).fadeToggle(600);
+								$( "#telefono" ).fadeToggle(700);
+								$( "#skill1" ).fadeToggle(900);
+								$( "#skill2" ).fadeToggle(900);
+							});
+						});
+				});
+			});		
+				
+			
+		
+		
+			
+		
+	
+		
+		
+
+
+
+
+
+			
+		//questa funzione lavora su una struttura ben definita di HTML + CSS, e ne sfrutta
+		//le caratteristiche (classi, tag, attributi) per manipolarla in maniera semplice e aggiungere
+		//la dinamica del "tabbed panel"
+		function makeTabs(container) {
+			var tabcontainer = $(container);
+			//la classe enabled è utile per "marcare" un elemento
+			//su cui lo script sta operando. Nel nostro caso, le linguette nei container
+			//marcati con questa classe sono nascoste di default, mentre se la classe manca sono visibili.
+			//In questo modo, se lo script non intervene, i contenuti saranno comunque visibili all'utente.
+			tabcontainer.addClass("enabled");
+			//agganciamo la logica all'evento click sulla linguetta
+			//con un handler su ogni tab:
+			//$("[role='tablist'] > [role='tab']",tabcontainer).click(function(){ 
+			//oppure cone la event delegation, che rende l'operazione acora più snella:
+			$("[role='tablist']",tabcontainer).on("click","[role='tab']",function(){ 
+				// QUI
+				$("button").click(function(){
+            	var pageURL = $(location).attr("href");
+            	alert(pageURL);
+       			 });
+				
+				var tab = $(this);
+				if (tab.hasClass("active")) return;
+				var tabid = tab.attr("aria-controls");
+				var panel = $("#"+tabid,tabcontainer);
+			
+				//lo script non mostra o nasconde nulla direttamente: tutta la dinamica è ottenuta manipolando le classi
+				//agganciate ai vari elementi, e lasciando che siano i selettori e le regole CSS a fare il resto
+				$("[role='tablist'] > [role='tab']", tabcontainer).attr("aria-selected","false").removeClass("active"); 
+				tab.attr("aria-selected","true").addClass("active");  
+				$("[role='tabpanel']",tabcontainer).attr("aria-hidden","true").removeClass("active");  
+				panel.attr("aria-hidden","false").addClass("active");  
+				//questo evento custom non viene utilizzato dallo script: potrà essere catturato dall'esterno
+				//per agganciare logica ulteriore all'evento di "cambio tab"
+				tabcontainer.trigger("awdtabs:change",tab);
+				//RICEVENTE: $(document).on("awdtabs:change",function(e,a2){comsole.log(a2)})
+			});
+		}
+		
+		//la funzione che segue prima manipola il container per creare tutto il
+		//markup richiesto da un tabcontainer "standard", poi richiama makeTabs
+		//per attivarlo
+		function makeTabs2(container) {
+			var tabcontainer = $(container);			
+			if (tabcontainer.hasClass("tabs")) {					
+				var tablist = $("<ul role='tablist'/>");	
+				var panels = $("> section",tabcontainer);
+				if (panels.filter(".active").length==0) panels.first().addClass("active");
+				panels.wrapAll("<div class='tabcontent'/>");
+				panels.each(function(){    
+				   var uid=Math.floor(Math.random() * 26) + Date.now();	
+				   var panel = $(this)
+				   //jQuery non ha un metodo hasAttribute, quindi usiamo quello del DOM 
+				   //estraendo l'oggetto DOM dall'array...
+				   var tabid = (panel[0].hasAttribute("id") ? panel.attr("id") : ("tabx"+(uid)));
+				   var tabtitle = (panel[0].hasAttribute("data-label") ? 
+					panel.attr("data-label") : 
+					(panel.has("header").length>0?
+						$("header",panel).text():
+						"Tab "+(panel.index()+1)));
+				   var tab = $("<li role='tab'/>");	
+				   tab.attr("aria-controls",tabid);
+				   tab.text(tabtitle); 
+				   panel.attr("id",tabid);
+				   panel.attr("role","tabpanel");
+				   if (panel.hasClass("active")) {
+					 tab.addClass("active");
+					 tab.attr("aria-selected","true");
+					 panel.attr("aria-hidden","false");
+				   } else {
+					 tab.attr("aria-selected","false");
+					 panel.attr("aria-hidden","true");    
+				   }				   				  
+				   tablist.append(tab);
+				  });			  
+				tabcontainer.prepend($("<nav/>").append(tablist));
+				makeTabs(container);
+			}	
+		}
+	
+
+		$(function() {
+		
+			//agganciamo come estensione di JQeury una funzione che richiama la nostra makeTabs su tutti gli elementi selezionati
+			//ritorniamo this (restituito a sua volta da thiseach) per permettere la concatenazione dei metodi di JQuery			
+			jQuery.fn["awdTabs"] = function(){return this.each(function(){makeTabs(this)})};
+			//oppure jQuery.fn.extend({awdTabs: function(){return this.each(function(){makeTabs(this)})}});
+			
+			/*---------------------------------------------------------*/
+			
+			//usiamo l'estensione di JQuery appena definita
+			$(".tabs.v0:first").awdTabs();
+			
+			/*---------------------------------------------------------*/
+				
+			//oppure popssiamo chuiamare direttamente la nostra funzione su oggetti DOM selezionati con JQuery
+			$(".tabs.v1").each(function(){ 
+				makeTabs(this);
+			});
+			
+			/*---------------------------------------------------------*/
+			
+			$(".tabs.v1bis").each(function(){ 
+				makeTabs(this);
+			});
+			
+			
+			/*---------------------------------------------------------*/
+			
+			$(".tabs.v2").each(function(){ 
+				makeTabs2(this);
+			});
+			
+			/*---------------------------------------------------------*/
+			
+			$(document).on("awdtabs:change",function(e,a2){console.log(a2)})
+		});
+
+		</script>
+</head>
+
+<body>
+
+<h2>Login Form</h2>
+
+<form action="/rest/login" method="post">
+
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
+    <button type="submit"><a href='home.html'/>Login</button>
+
+  </div>
+
+
+</form>
+
+
+</body>
 </html>

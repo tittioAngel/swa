@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.Application;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import security.AppExceptionMapper;
 import security.AutenticazioneResource;
 
 /**
@@ -53,7 +54,7 @@ public class RESTApp extends Application{
         //c.add(CORSFilter.class);
 
         //esempio di exception mapper, che mappa in Response eccezioni non già derivanti da WebApplicationException
-        //c.add(AppExceptionMapper.class);
+        c.add(AppExceptionMapper.class);
 
         classes = Collections.unmodifiableSet(c);
     }

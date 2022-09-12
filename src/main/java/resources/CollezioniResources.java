@@ -25,6 +25,8 @@ import java.net.URI;
  *
  * @author LENOVO
  */
+
+@Path ("collezioni")
 public class CollezioniResources {
     
     
@@ -118,7 +120,7 @@ public class CollezioniResources {
      */
     @GET
     @Produces("application/json")
-    @Path("{id: [1-9]+}")
+    @Path("{id: [1-9]+}/condivisi")
     public Response getCondivisi(
                     @Context UriInfo uriinfo,    
                     @PathParam("id") int idAuth)throws RESTWebApplicationException{
@@ -152,7 +154,7 @@ public class CollezioniResources {
      * @param id
      * @return 
      */
-    @Path("{id: [1-9]+}")
+    @Path("{id: [1-9]+}/dettaglocoll")
     public CollezioneResource getDettCol(@PathParam("id") int id) {
         
         Collezione c = null;

@@ -23,6 +23,8 @@ import model.Stato;
  *
  * @author LENOVO
  */
+@Path("collezione")
+
 class CollezioneResource {
 
    private final Collezione c;

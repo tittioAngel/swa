@@ -5,6 +5,7 @@
 package resources;
 
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import model.Autore;
  *
  * @author LENOVO
  */
+@Path("autori")
 public class AutoriResources {
     
     /**

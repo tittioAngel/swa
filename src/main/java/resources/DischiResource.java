@@ -27,6 +27,7 @@ import swarest.RESTWebApplicationException;
  *
  * @author LENOVO
  */
+@Path("dischi")
 class DischiResource {
 
     private Collezione c;
@@ -151,6 +152,7 @@ class DischiResource {
      */
     @GET
     @Produces("application/json")
+    
     public Response getDischiAut(@QueryParam("id") int idAutore) throws WebApplicationException {
          
         List<Disco> res = new ArrayList<>();
