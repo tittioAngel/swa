@@ -61,7 +61,7 @@ class CollezioneResource {
      * @return 
      */
     @POST
-    @Path("dischi")
+    @Path("{id: [1-9]}/addisco")
     @Consumes("application/json")
     public Response addDisco(
                               @Context UriInfo uriinfo,

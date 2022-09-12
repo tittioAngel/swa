@@ -11,6 +11,7 @@ import model.Autore;
  *
  * @author LENOVO
  */
+@Path("autore")
 public class AutoreResources {
     
     private final Autore a;

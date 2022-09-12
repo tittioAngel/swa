@@ -76,6 +76,7 @@ class DischiResource {
      */
     @GET
     @Produces("application/json")
+    @Path("{utente: [1-9]+}/{disco: [1-9]}")
     public Response getDischo(@QueryParam("id") int id,
                               @QueryParam("titolo") String titolo,
                               @QueryParam("autore") Autore autore,
@@ -111,6 +112,7 @@ class DischiResource {
      */
     @GET
     @Produces("application/json")
+    @Path("{id: [1-9]}")
     public Response getDischiPers(@QueryParam("titolo") String titolo,
                                   @QueryParam("etichetta") String etichetta,
                                   @QueryParam("formato") String formato) throws WebApplicationException {

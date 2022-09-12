@@ -112,7 +112,7 @@ public class CollezioniResources {
     }
     
     /**
-     * OP 3 elenco collezioni condivise con un utente
+     * 
      * @param uriinfo
      * @param idAuth
      * @return
@@ -150,11 +150,12 @@ public class CollezioniResources {
     }
     
     /**
-     * Estensione del path per gestire le operazioni su singolo progetto
+     OP 4
+     * 
      * @param id
      * @return 
      */
-    @Path("{id: [1-9]+}/dettaglocoll")
+    @Path("{id: [1-9]+}/dettaglio/{collezione: [1-9]+}")
     public CollezioneResource getDettCol(@PathParam("id") int id) {
         
         Collezione c = null;
